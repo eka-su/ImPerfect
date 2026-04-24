@@ -10,6 +10,7 @@ import com.example.imperfect.feature.diary.presentation.DiaryScreen
 import com.example.imperfect.feature.home.presentation.HomeScreen
 import com.example.imperfect.feature.recommendations.presentation.RecommendationsScreen
 import com.example.imperfect.feature.settings.presentation.SettingsScreen
+import com.example.imperfect.feature.splash.presentation.SplashScreen
 import com.example.imperfect.feature.triggers.presentation.TriggersScreen
 
 @Composable
@@ -22,6 +23,10 @@ fun AppNavHost() {
         navController = navController,
         startDestination = Screen.Splash.route
     ) {
+        // START FLOW
+        composable(Screen.Splash.route) {
+            SplashScreen(router)
+        }
 
         // MAIN
         composable(Screen.Home.route) {
