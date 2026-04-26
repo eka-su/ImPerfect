@@ -7,24 +7,21 @@ class Router(
 ) {
 
     // START FLOW
-    fun openLogin() {
-        navController.navigate(Screen.Login.route) {
-            popUpTo(0)
+    fun openLogin() = navigateClear(Screen.Login.route)
+    fun openHome() = navigateClear(Screen.Home.route)
+    fun openRegister() = navController.navigate(Screen.Register.route)
+    fun openResetPassword() = navController.navigate(Screen.ResetPassword.route)
+    fun openOnboarding() = navController.navigate(Screen.Onboarding.route)
+
+    // BOTTOM NAV
+    fun navigateToBottomTab(screen: Screen) {
+        navController.navigate(screen.route) {
+            popUpTo(Screen.Home.route) {
+                saveState = true
+            }
+            launchSingleTop = true
+            restoreState = true
         }
-    }
-    fun openHome() {
-        navController.navigate(Screen.Home.route) {
-            popUpTo(0)
-        }
-    }
-    fun openRegister() {
-        navController.navigate(Screen.Register.route)
-    }
-    fun openResetPassword() {
-        navController.navigate(Screen.ResetPassword.route)
-    }
-    fun openOnboarding() {
-        navController.navigate(Screen.Onboarding.route)
     }
 
     // MAIN
@@ -74,7 +71,17 @@ class Router(
 
     // REPORTS
     fun openReports() = navController.navigate(Screen.Reports.route)
+
+    // BACK
     fun back() {
         navController.popBackStack()
+    }
+
+    // PRIVATE HELPERS
+    private fun navigateClear(route: String) {
+        navController.navigate(route) {
+            popUpTo(0)
+            launchSingleTop = true
+        }
     }
 }
