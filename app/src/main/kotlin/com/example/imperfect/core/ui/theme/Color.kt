@@ -19,6 +19,7 @@ val BlueShadowLight = BlueShadow.copy(alpha = 0.05f) //мягкая тень г�
 val GreyShadow = Color(0xFF484848) //для теней
 val GreyShadowLight = GreyShadow.copy(alpha = 0.46f) // мягая тень серая, для карточек
 val BlackShadowLight = TextPrimary.copy(alpha = 0.25f) // мягкая тень черная, кнопки
+val BottomBarGradientStart = Color(0xFFF5F5F5) //для градиента бара
 
 // ACCENT, акцентные цвета, что - то декаративное
 val Red = Color(0xFFEC5655)
