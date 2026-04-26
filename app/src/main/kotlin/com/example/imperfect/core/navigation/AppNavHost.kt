@@ -43,12 +43,10 @@ fun AppNavHost() {
     Scaffold(
         bottomBar = {
             if (showBottomBar) {
-                if (showBottomBar) {
-                    BottomBar(
-                        currentRoute = currentRoute,
-                        router = router
-                    )
-                }
+                BottomBar(
+                    currentRoute = currentRoute,
+                    router = router
+                )
             }
         }
     ) { padding ->
