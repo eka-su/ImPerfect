@@ -60,6 +60,11 @@ sealed class Screen(val route: String) {
     object AddFoodProduct : Screen("add_food_product")
     object WaterTracker : Screen("water_tracker")//?
     object AddWater : Screen("add_water")//?
+    object WaterJournal : Screen("water_journal")
+    object EditWaterDrinks : Screen("edit_water_drinks")
+    object EditWaterDrink : Screen("edit_water_drink/{drinkId}") {
+        fun createRoute(id: String) = "edit_water_drink/$id"
+    }
 
     // TRIGGERS & RECOMMENDATIONS
     object TriggerDetail : Screen("trigger_detail/{triggerId}") {
