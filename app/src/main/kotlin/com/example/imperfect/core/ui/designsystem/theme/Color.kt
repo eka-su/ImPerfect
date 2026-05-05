@@ -1,4 +1,4 @@
-package com.example.imperfect.core.ui.theme
+package com.example.imperfect.core.ui.designsystem.theme
 
 import androidx.compose.ui.graphics.Color
 

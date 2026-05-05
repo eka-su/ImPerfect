@@ -1,4 +1,4 @@
-package com.example.imperfect.core.ui.components.bottombar
+package com.example.imperfect.core.ui.kit.bottombar
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
@@ -11,8 +11,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.example.imperfect.core.navigation.BottomNavItem
-import com.example.imperfect.core.ui.theme.BluePrimary
-import com.example.imperfect.core.ui.theme.IconGray
+import com.example.imperfect.core.ui.designsystem.theme.BluePrimary
+import com.example.imperfect.core.ui.designsystem.theme.IconGray
 
 @Composable
 fun BottomBarItem(

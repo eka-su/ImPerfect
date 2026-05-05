@@ -1,4 +1,4 @@
-package com.example.imperfect.core.ui.components.bottombar
+package com.example.imperfect.core.ui.kit.bottombar
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.runtime.Composable
@@ -7,7 +7,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.compose.rememberNavController
 import com.example.imperfect.core.navigation.Router
 import com.example.imperfect.core.navigation.Screen
-import com.example.imperfect.core.ui.theme.ImPerfectTheme
+import com.example.imperfect.core.ui.designsystem.theme.ImPerfectTheme
 
 @Composable
 fun BottomBar(

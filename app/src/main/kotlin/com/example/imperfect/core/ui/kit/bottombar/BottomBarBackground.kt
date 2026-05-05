@@ -1,4 +1,4 @@
-package com.example.imperfect.core.ui.components.bottombar
+package com.example.imperfect.core.ui.kit.bottombar
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -10,8 +10,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import com.example.imperfect.core.ui.theme.Background
-import com.example.imperfect.core.ui.theme.BlueShadowLight
+import com.example.imperfect.core.ui.designsystem.theme.Background
+import com.example.imperfect.core.ui.designsystem.theme.BlueShadowLight
 
 @Composable
 fun BottomBarBackground() { //голубая тень вверх

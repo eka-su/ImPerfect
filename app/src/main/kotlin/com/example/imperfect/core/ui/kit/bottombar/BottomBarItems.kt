@@ -1,4 +1,4 @@
-package com.example.imperfect.core.ui.components.bottombar
+package com.example.imperfect.core.ui.kit.bottombar
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
