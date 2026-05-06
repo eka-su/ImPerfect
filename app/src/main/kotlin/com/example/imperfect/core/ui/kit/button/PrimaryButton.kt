@@ -1,30 +1,37 @@
 package com.example.imperfect.core.ui.kit.button
 
+import androidx.compose.ui.graphics.Color
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.RowScope
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.example.imperfect.R
 import com.example.imperfect.core.ui.designsystem.theme.Background
 import com.example.imperfect.core.ui.designsystem.theme.BluePrimary
-import com.example.imperfect.core.ui.designsystem.theme.ImPerfectTheme
 
 @Composable
 fun PrimaryButton(
-    text: String,
     onClick: () -> Unit,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    containerColor: Color = BluePrimary,
+    contentColor: Color = Background,
+    content: @Composable RowScope.() -> Unit
 ) {
     Button(
         onClick = onClick,
@@ -35,49 +42,74 @@ fun PrimaryButton(
             pressedElevation = 2.dp
         ),
         colors = ButtonDefaults.buttonColors(
-            containerColor = BluePrimary, //мб секнодери?
-            contentColor = Background
+            containerColor = containerColor,
+            contentColor = contentColor
         )
     ) {
-        Text(
-            text = text,
-            style = MaterialTheme.typography.titleMedium
-        )
+        content()
     }
 }
 
 
-
 @Preview(showBackground = true)
 @Composable
-fun PrimaryButtonPreview() {
-    ImPerfectTheme {
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(16.dp),
-            verticalArrangement = Arrangement.spacedBy(12.dp)
+fun PrimaryButtonSizePreview() {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(20.dp),
+        verticalArrangement = Arrangement.spacedBy(12.dp)
+    ) {
+
+        PrimaryButton(
+            onClick = {},
+            modifier = Modifier.fillMaxWidth()
         ) {
+            Text("Обычная кнопка")
+        }
 
-            PrimaryButton(
-                text = "Обычная кнопка",
-                onClick = {},
-                modifier = Modifier.fillMaxWidth()
-            )
+        PrimaryButton(
+            onClick = {},
+            modifier = Modifier.width(160.dp)
+        ) {
+            Text("Узкая")
+        }
 
-            PrimaryButton(
-                text = "Узкая кнопка",
-                onClick = {},
-                modifier = Modifier.width(160.dp)
-            )
+        PrimaryButton(
+            onClick = {},
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(56.dp)
+        ) {
+            Text("Высокая кнопка")
+        }
 
-            PrimaryButton(
-                text = "Высокая кнопка",
-                onClick = {},
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(56.dp)
+        PrimaryButton(
+            onClick = {},
+            containerColor = Color.Red,
+            contentColor = Color.White,
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            Icon(
+                painter = painterResource(id = R.drawable.ic_close),
+                contentDescription = null,
+                modifier = Modifier.size(16.dp)
             )
+            Spacer(Modifier.width(8.dp))
+            Text("Удалить")
+        }
+
+        PrimaryButton(
+            onClick = {},
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            Icon(
+                painter = painterResource(id = R.drawable.ic_close),
+                contentDescription = null,
+                modifier = Modifier.size(16.dp)
+            )
+            Spacer(Modifier.width(8.dp))
+            Text("С иконкой")
         }
     }
 }

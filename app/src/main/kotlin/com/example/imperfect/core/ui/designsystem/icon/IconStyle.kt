@@ -4,6 +4,7 @@ import androidx.compose.ui.graphics.Color
 import com.example.imperfect.core.ui.designsystem.theme.BlueLightBackground
 import com.example.imperfect.core.ui.designsystem.theme.BluePrimary
 import com.example.imperfect.core.ui.designsystem.theme.IconGray
+import com.example.imperfect.core.ui.designsystem.theme.InputBackground
 
 data class IconStyle(
     val background: Color,
@@ -20,5 +21,10 @@ object IconStyles {
     val Primary = IconStyle(
         background = BlueLightBackground,
         tint = BluePrimary
+    )
+
+    val Input = IconStyle(
+        background = InputBackground,
+        tint = IconGray
     )
 }
