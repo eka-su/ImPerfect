@@ -1,3 +1,26 @@
 <resources>
     <string name="app_name">ImPerfect</string>
+
+    <!-- Photo Sheet -->
+    <string name="photo_sheet_title">Добавить фото</string>
+    <string name="photo_sheet_camera">Камера</string>
+    <string name="photo_sheet_gallery">Галерея</string>
+
+    <!-- Exit Dialog -->
+    <string name="exit_dialog_title">Выйти?</string>
+    <string name="exit_dialog_message">Изменения не сохранятся</string>
+    <string name="exit_dialog_confirm">Продолжить</string>
+    <string name="exit_dialog_dismiss">Отмена</string>
+
+    <!-- Capture -->
+    <string name="capture_step">Шаг %1$d/3</string> <!-- 👈 НОВОЕ -->
+    <string name="capture_instruction_1">Смотрите прямо</string> <!-- 👈 НОВОЕ -->
+    <string name="capture_instruction_2">Поверните влево</string> <!-- 👈 НОВОЕ -->
+    <string name="capture_instruction_3">Поверните вправо</string> <!-- 👈 НОВОЕ -->
+
+    <!-- Preview -->
+    <string name="preview_title">Предпросмотр (%1$d/3)</string>
+    <string name="action_retake">Переснять</string>
+    <string name="action_confirm">Подтвердить</string>
+
 </resources>
