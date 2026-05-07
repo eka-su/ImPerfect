@@ -59,7 +59,9 @@ fun HomeScreen(router: Router) {
         }
 
         SheetContainer(
-            modifier = Modifier.align(Alignment.Center)
+            modifier = Modifier
+                .align(Alignment.Center)
+                .padding(horizontal = 20.dp)
         ) {
             Column(
                 modifier = Modifier.padding(20.dp),
