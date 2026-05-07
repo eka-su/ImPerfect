@@ -1,6 +1,7 @@
 package com.example.imperfect.core.navigation
 
 import androidx.navigation.NavController
+import java.net.URLEncoder
 
 class Router(
     private val navController: NavController
@@ -43,6 +44,20 @@ class Router(
     }
     fun openPhotoViewer(id: String) {
         navController.navigate(Screen.PhotoViewer.createRoute(id))
+    }
+
+    fun openPhotoFlow() {
+        navController.navigate(Screen.PhotoFlow.route) {
+            launchSingleTop = true
+        }
+    }
+    fun openHomeAndClearPhotoFlow() {
+        navController.navigate(Screen.Home.route) {
+            popUpTo(Screen.PhotoFlow.route) {
+                inclusive = true
+            }
+            launchSingleTop = true
+        }
     }
 
     // GALLERY

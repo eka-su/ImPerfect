@@ -5,14 +5,22 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.sqlite.db.SupportSQLiteDatabase
 import com.example.imperfect.core.database.AppDatabase
+import com.example.imperfect.feature.photo.data.repository.PhotoRepositoryImpl
+import com.example.imperfect.feature.photo.data.source.PhotoLocalSource
+import com.example.imperfect.feature.photo.domain.repository.PhotoRepository
+import com.example.imperfect.feature.photo.domain.usecase.AddPhotoUseCase
+import com.example.imperfect.feature.photo.domain.usecase.DeletePhotoUseCase
+import com.example.imperfect.feature.photo.domain.usecase.GetPhotosUseCase
+import com.example.imperfect.feature.photo.domain.usecase.ValidatePhotosUseCase
+import com.example.imperfect.feature.photo.presentation.viewmodel.PhotoViewModel
+import org.koin.core.module.dsl.viewModel
 import org.koin.dsl.module
 
 object AppModule {
 
-
     val databaseModule = module {
-       // TODO: Room DB + DAO:
-       // diary, photo, analysis, nutrition, products, triggers, user_state, reports
+        // TODO: Room DB + DAO:
+        // diary, analysis, nutrition, products, triggers, user_state, reports
 
         single {
             val context = get<Context>()
@@ -63,7 +71,6 @@ object AppModule {
         // TODO: реазлизоват репозитории
         // AuthRepository
         // DiaryRepository
-        // PhotoRepository
         // AnalysisRepository
         // NutritionRepository
         // ProductRepository
@@ -71,6 +78,12 @@ object AppModule {
         // RecommendationRepository
         // UserStateRepository
         // ReportRepository
+        single<PhotoLocalSource> {
+            PhotoLocalSource(get())
+        }
+        single<PhotoRepository> {
+            PhotoRepositoryImpl(get())
+        }
     }
 
     // USE CASES
@@ -78,7 +91,6 @@ object AppModule {
         // TODO: добавить use case
         // Auth: login/register/reset
         // Diary: get/save
-        // Photo: save/get
         // Analysis: analyze photo
         // Nutrition: add/edit food + water
         // Products: add/get/favorite
@@ -86,6 +98,10 @@ object AppModule {
         // Recommendations: get
         // UserState: save lifestyle/skin/health
         // Reports: generate/get
+        single { AddPhotoUseCase(get()) }
+        single { GetPhotosUseCase(get()) }
+        single { DeletePhotoUseCase(get()) }
+        single { ValidatePhotosUseCase() }
     }
 
     // VIEWMODELS
@@ -101,6 +117,12 @@ object AppModule {
         // RecommendationViewModel
         // UserStateViewModel
         // ReportsViewModel
+        viewModel {
+            PhotoViewModel(
+                get(),
+                get(),
+            )
+        }
     }
 
     val modules = listOf(

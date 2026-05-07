@@ -25,11 +25,24 @@ sealed class Screen(val route: String) {
         fun createRoute(id1: String, id2: String) =
             "compare/$id1/$id2"
     }
+    object PhotoFlow : Screen("photo_flow")
     object SelectCompareDates : Screen("select_compare_dates") //?
     object PhotoViewer : Screen("photo_viewer/{photoId}") { //?
         fun createRoute(id: String) = "photo_viewer/$id"
     }
     object SkinTypesGuide : Screen("skin_types_guide")
+
+    object PhotoSource : Screen("photo_source")
+
+    object PhotoGuide : Screen("photo_guide/{step}") {
+        fun createRoute(step: Int) = "photo_guide/$step"
+    }
+
+    object PhotoCapture : Screen("photo_capture/{step}") {
+        fun createRoute(step: Int) = "photo_capture/$step"
+    }
+
+    object PhotoPreview : Screen("photo_preview")
 
     // GALLERY
     object Gallery : Screen("gallery")

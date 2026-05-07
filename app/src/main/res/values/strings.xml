@@ -13,14 +13,17 @@
     <string name="exit_dialog_dismiss">Отмена</string>
 
     <!-- Capture -->
-    <string name="capture_step">Шаг %1$d/3</string> <!-- 👈 НОВОЕ -->
-    <string name="capture_instruction_1">Смотрите прямо</string> <!-- 👈 НОВОЕ -->
-    <string name="capture_instruction_2">Поверните влево</string> <!-- 👈 НОВОЕ -->
-    <string name="capture_instruction_3">Поверните вправо</string> <!-- 👈 НОВОЕ -->
+    <string name="capture_step">Шаг %1$d/3</string>
+    <string name="capture_instruction_1">Смотрите прямо</string>
+    <string name="capture_instruction_2">Поверните влево</string>
+    <string name="capture_instruction_3">Поверните вправо</string>
 
     <!-- Preview -->
     <string name="preview_title">Предпросмотр (%1$d/3)</string>
     <string name="action_retake">Переснять</string>
     <string name="action_confirm">Подтвердить</string>
+
+    <!-- Gallery -->
+    <string name="gallery_opening">Открываем галерею...</string>
 
 </resources>
