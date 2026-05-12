@@ -19,8 +19,8 @@ fun PhotoSheetRow(
         text = text,
         icon = icon,
         onClick = onClick,
-        modifier = modifier
-            .fillMaxWidth(),
+        fullRowClickable = true,
+        modifier = modifier.fillMaxWidth(),
         textStyle = MaterialTheme.typography.bodySmall,
         textColor = TextSecondary,
         iconSpacing = 12.dp,

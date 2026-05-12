@@ -16,10 +16,10 @@ fun BackTextRow(
         text = text,
         icon = { BackButton(onClick = onClick) },
         onClick = onClick,
+        fullRowClickable = false,
         modifier = modifier
     )
 }
-
 
 @Preview(showBackground = true)
 @Composable

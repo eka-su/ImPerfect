@@ -3,6 +3,7 @@ package com.example.imperfect.core.ui.kit.list
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.graphics.Color
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.padding
@@ -25,18 +26,31 @@ fun IconTextRow(
     icon: @Composable () -> Unit,
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
+    fullRowClickable: Boolean = true,
     textStyle: TextStyle = MaterialTheme.typography.titleLarge,
     textColor: Color = TextTitle,
     iconSpacing: Dp = 20.dp,
     verticalPadding: Dp = 0.dp
 ) {
+
+    val rowModifier = if (fullRowClickable) {
+        modifier.clickable { onClick() }
+    } else {
+        modifier
+    }
+
     Row(
-        modifier = modifier
-            .clickable { onClick() }
-            .padding(vertical = verticalPadding),
+        modifier = rowModifier.padding(vertical = verticalPadding),
         verticalAlignment = Alignment.CenterVertically
     ) {
-        icon()
+
+        if (fullRowClickable) {
+            icon()
+        } else {
+            Box(modifier = Modifier.clickable { onClick() }) {
+                icon()
+            }
+        }
 
         Spacer(modifier = Modifier.width(iconSpacing))
 

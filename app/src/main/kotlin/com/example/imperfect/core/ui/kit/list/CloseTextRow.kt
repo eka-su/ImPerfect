@@ -14,6 +14,7 @@ fun CloseTextRow(
         text = text,
         icon = { CloseButton(onClick = onClick) },
         onClick = onClick,
+        fullRowClickable = false,
         modifier = modifier
     )
 }
