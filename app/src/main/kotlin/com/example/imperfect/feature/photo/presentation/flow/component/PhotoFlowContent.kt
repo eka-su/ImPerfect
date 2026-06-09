@@ -13,7 +13,6 @@ fun PhotoFlowContent(
     router: Router
 ) {
     when (state.stage) {
-
         FlowStage.SOURCE -> SourceScreen(viewModel, router)
         FlowStage.GUIDE -> GuideScreen(viewModel, router)
         FlowStage.CAPTURE -> CaptureScreen(state, viewModel)

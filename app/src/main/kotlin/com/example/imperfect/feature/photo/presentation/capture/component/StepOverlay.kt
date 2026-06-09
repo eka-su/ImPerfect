@@ -14,21 +14,29 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.example.imperfect.R
+import com.example.imperfect.feature.photo.domain.model.PhotoViewType
 
 @Composable
-fun StepOverlay(step: Int) {
+fun StepOverlay(
+    step: Int,
+    order: List<PhotoViewType>
+) {
 
-    val instruction = when (step) {
-        1 -> stringResource(R.string.capture_instruction_1)
-        2 -> stringResource(R.string.capture_instruction_2)
-        3 -> stringResource(R.string.capture_instruction_3)
+    val currentType = order.getOrNull(step)
+        ?: order.firstOrNull()
+        ?: return
+
+    val instruction = when (currentType.code) {
+        "FRONT" -> stringResource(R.string.capture_instruction_1)
+        "LEFT" -> stringResource(R.string.capture_instruction_2)
+        "RIGHT" -> stringResource(R.string.capture_instruction_3)
         else -> ""
     }
 
-    val maskIcon = when (step) {
-        1 -> R.drawable.ic_front
-        2 -> R.drawable.ic_left
-        3 -> R.drawable.ic_right
+    val maskIcon = when (currentType.code) {
+        "FRONT" -> R.drawable.ic_front
+        "LEFT" -> R.drawable.ic_left
+        "RIGHT" -> R.drawable.ic_right
         else -> R.drawable.ic_front
     }
 
@@ -44,7 +52,7 @@ fun StepOverlay(step: Int) {
         )
 
         Text(
-            text = "${instruction} (${step}/3)",
+            text = "$instruction (${step + 1}/${order.size})",
             color = Color.White,
             modifier = Modifier
                 .align(Alignment.TopCenter)

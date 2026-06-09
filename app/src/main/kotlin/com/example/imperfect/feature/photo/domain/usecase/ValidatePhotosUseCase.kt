@@ -1,20 +1,17 @@
 package com.example.imperfect.feature.photo.domain.usecase
 
-import com.example.imperfect.core.constants.PhotoViewTypes
 import com.example.imperfect.feature.photo.domain.model.Photo
+import com.example.imperfect.feature.photo.domain.model.PhotoViewType
 
 class ValidatePhotosUseCase {
 
-    operator fun invoke(photos: List<Photo>): Boolean {
+    operator fun invoke(
+        photos: List<Photo>,
+        requiredTypes: List<PhotoViewType>
+    ): Boolean {
 
-        val types = photos.map { it.viewTypeId }.toSet()
+        val existing = photos.map { it.viewTypeId }.toSet()
 
-        return types.containsAll(
-            setOf(
-                PhotoViewTypes.FRONT,
-                PhotoViewTypes.LEFT,
-                PhotoViewTypes.RIGHT
-            )
-        )
+        return requiredTypes.all { it.id in existing }
     }
 }

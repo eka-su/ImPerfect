@@ -3,7 +3,6 @@ package com.example.imperfect.feature.photo.data.source
 import com.example.imperfect.core.database.dao.PhotoDao
 import com.example.imperfect.core.database.entity.DiaryPhotoEntity
 
-
 class PhotoLocalSource(
     private val photoDao: PhotoDao
 ) {

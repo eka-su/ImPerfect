@@ -12,9 +12,13 @@ import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
+import com.example.imperfect.feature.photo.presentation.state.Source
 
 @Composable
-fun PreviewImage(photoPath: String) {
+fun PreviewImage(
+    photoPath: String,
+    source: Source,
+) {
 
     if (photoPath.isBlank()) return
 
@@ -31,8 +35,9 @@ fun PreviewImage(photoPath: String) {
             modifier = Modifier
                 .fillMaxSize()
                 .graphicsLayer {
-                    scaleX = -1f // отзеркалить
+                    scaleX = if (source == Source.CAMERA) -1f else 1f
                 }
         )
     }
 }
+

@@ -11,6 +11,7 @@ import androidx.compose.ui.unit.dp
 import com.example.imperfect.feature.photo.presentation.preview.component.PhotoFrame
 import com.example.imperfect.feature.photo.presentation.preview.component.PreviewActions
 import com.example.imperfect.feature.photo.presentation.preview.component.PreviewHeader
+import com.example.imperfect.feature.photo.presentation.state.Source
 
 @Composable
 fun PhotoPreviewScreen(
@@ -18,6 +19,7 @@ fun PhotoPreviewScreen(
     step: Int,
     isValid: Boolean,
     error: String?,
+    source: Source,
     onConfirm: () -> Unit,
     onRetake: () -> Unit,
     onClose: () -> Unit
@@ -30,6 +32,7 @@ fun PhotoPreviewScreen(
 
         Spacer(Modifier.height(16.dp))
 
+
         PreviewHeader(step, onClose)
 
         Spacer(Modifier.height(16.dp))
@@ -37,7 +40,8 @@ fun PhotoPreviewScreen(
         PhotoFrame(
             photoPath = photoPath,
             isValid = isValid,
-            error = error
+            error = error,
+            source = source
         )
 
         Spacer(Modifier.height(16.dp))
@@ -50,6 +54,9 @@ fun PhotoPreviewScreen(
         Spacer(Modifier.height(20.dp))
     }
 }
+
+
+
 
 
 

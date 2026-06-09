@@ -7,6 +7,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.example.imperfect.feature.photo.domain.model.PhotoViewType
 import com.example.imperfect.feature.photo.presentation.capture.camera.rememberCamera
 import com.example.imperfect.feature.photo.presentation.capture.component.CameraPreview
 import com.example.imperfect.feature.photo.presentation.capture.component.CaptureButton
@@ -16,16 +17,21 @@ import com.example.imperfect.feature.photo.presentation.capture.component.TopBar
 @Composable
 fun PhotoCaptureScreen(
     step: Int,
+    order: List<PhotoViewType>,
     onTakePhoto: (String) -> Unit,
     onBack: () -> Unit
 ) {
+
     val camera = rememberCamera(onTakePhoto)
 
     Box(Modifier.fillMaxSize()) {
 
         CameraPreview(camera.previewView)
 
-        StepOverlay(step)
+        StepOverlay(
+            step = step,
+            order = order
+        )
 
         CaptureButton(
             isTakingPhoto = camera.isTakingPhoto,
@@ -42,8 +48,3 @@ fun PhotoCaptureScreen(
         )
     }
 }
-
-
-
-
-

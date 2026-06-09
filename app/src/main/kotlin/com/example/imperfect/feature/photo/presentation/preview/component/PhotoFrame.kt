@@ -20,12 +20,14 @@ import androidx.compose.ui.unit.dp
 import com.example.imperfect.R
 import com.example.imperfect.core.ui.designsystem.theme.BluePrimary
 import com.example.imperfect.core.ui.kit.container.SheetContainer
+import com.example.imperfect.feature.photo.presentation.state.Source
 
 @Composable
 fun PhotoFrame(
     photoPath: String,
     isValid: Boolean,
-    error: String?
+    error: String?,
+    source: Source,
 ) {
     SheetContainer {
 
@@ -40,7 +42,10 @@ fun PhotoFrame(
 
             Column(modifier = Modifier.padding(12.dp)) {
 
-                PreviewImage(photoPath)
+                PreviewImage(
+                    photoPath = photoPath,
+                    source = source
+                )
 
                 if (!isValid && error != null) {
                     Spacer(Modifier.height(12.dp))

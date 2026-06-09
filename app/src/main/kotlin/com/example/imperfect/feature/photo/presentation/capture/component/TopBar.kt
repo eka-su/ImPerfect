@@ -31,7 +31,7 @@ fun TopBar(
         )
 
         Text(
-            text = stringResource(R.string.capture_step, step),
+            text = stringResource(R.string.capture_step, step+1),
             color = Color.White,
             modifier = Modifier.align(Alignment.Center)
         )

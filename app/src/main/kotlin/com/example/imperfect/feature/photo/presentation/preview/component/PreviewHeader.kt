@@ -11,7 +11,8 @@ fun PreviewHeader(
     onClose: () -> Unit
 ) {
     CloseTextRow(
-        text = stringResource(R.string.preview_title, step),
+        text = stringResource(R.string.preview_title, step+1),
         onClick = onClose
     )
 }
+
