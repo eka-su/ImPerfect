@@ -5,6 +5,7 @@ import androidx.room.ForeignKey
 import androidx.room.Index
 import androidx.room.ColumnInfo
 import androidx.room.PrimaryKey
+
 @Entity(
     tableName = "diary_photo",
     foreignKeys = [

@@ -1,6 +1,7 @@
 package com.example.imperfect
 
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
@@ -12,7 +13,10 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
+            Log.d("ROOT_TRACE", "setContent recomposed")
+
             ImPerfectTheme {
+                Log.d("ROOT_TRACE", "theme recomposed")
                 AppNavHost()
             }
         }

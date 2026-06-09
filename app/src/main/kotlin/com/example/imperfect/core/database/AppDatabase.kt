@@ -2,11 +2,13 @@ package com.example.imperfect.core.database
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
+import com.example.imperfect.core.database.dao.AnalysisContextDao
 import com.example.imperfect.core.database.dao.AnalysisDao
 import com.example.imperfect.core.database.dao.DiaryDao
 import com.example.imperfect.core.database.dao.LookupDao
 import com.example.imperfect.core.database.dao.PhotoDao
 import com.example.imperfect.core.database.dao.UserDao
+import com.example.imperfect.core.database.entity.AnalysisContextEntity
 import com.example.imperfect.core.database.entity.AppUserEntity
 import com.example.imperfect.core.database.entity.DiaryPhotoEntity
 import com.example.imperfect.core.database.entity.MultiImageAnalysisEntity
@@ -32,6 +34,7 @@ import com.example.imperfect.core.database.entity.SkinIssueSummaryEntity
         PhotoAnalysisStatusEntity::class,
         SkinIssueSummaryEntity::class,
         MultiImageAnalysisPhotoEntity::class,
+        AnalysisContextEntity::class,
     ],
     version = 1
 )
@@ -42,4 +45,5 @@ abstract class AppDatabase : RoomDatabase() {
     abstract fun analysisDao(): AnalysisDao
     abstract fun lookupDao(): LookupDao
     abstract fun userDao(): UserDao
+    abstract fun analysisContextDao(): AnalysisContextDao
 }
