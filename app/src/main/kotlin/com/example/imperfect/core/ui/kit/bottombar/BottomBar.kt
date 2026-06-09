@@ -15,7 +15,7 @@ fun BottomBar(
     router: Router
 ) {
     Box {
-        BottomBarBackground()
+        //BottomBarBackground()//пока убрать
         BottomBarContainer {
             BottomBarItems(
                 currentRoute = currentRoute,

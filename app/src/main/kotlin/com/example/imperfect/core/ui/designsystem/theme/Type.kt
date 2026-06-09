@@ -113,10 +113,10 @@ val Typography = Typography(
     ),
 
     // Подписи иконок, что то мелкое
-    displaySmall = TextStyle(
+    displaySmall = TextStyle( //было 10 мб 12?
         fontFamily = Inter,
         fontWeight = FontWeight.Light,
-        fontSize = 10.sp,
+        fontSize = 12.sp,
         lineHeight = LineHeights.Default
     ),
 
