@@ -1,7 +1,7 @@
 package com.example.imperfect.core.navigation
 
+import android.util.Log
 import androidx.navigation.NavController
-import java.net.URLEncoder
 
 class Router(
     private val navController: NavController
@@ -26,16 +26,36 @@ class Router(
     }
 
     // MAIN
-    fun openDiary() = navController.navigate(Screen.Diary.route)
+    fun openDiary() {
+        Log.d("NAV", "openDiary() called")
+        navController.navigate(Screen.Diary.route)
+    }
+
     fun openAnalytics() = navController.navigate(Screen.Analytics.route)
     fun openTriggers() = navController.navigate(Screen.Triggers.route)
     fun openRecommendations() = navController.navigate(Screen.Recommendations.route)
     fun openSettings() = navController.navigate(Screen.Settings.route)
 
     // PHOTO
-    fun openAnalysis(photoId: Long) {
-        navController.navigate(Screen.AnalysisResult.createRoute(photoId))
+    fun openAnalysis(
+        photoIds: List<Int>,
+        diaryId: Int
+    ) {
+
+        navController.navigate(
+            Screen.AnalysisResult.route(
+                photoIds = photoIds,
+                diaryId = diaryId
+            )
+        )
     }
+
+    fun openAnalysisById(id: Int) {
+        navController.navigate(
+            Screen.AnalysisResult.routeById(id)
+        )
+    }
+
     fun openCompare(id1: String, id2: String) {
         navController.navigate(Screen.Compare.createRoute(id1, id2))
     }
@@ -47,10 +67,12 @@ class Router(
     }
 
     fun openPhotoFlow() {
+        Log.d("PHOTO_FLOW", "➡️ openPhotoFlow CALLED")
         navController.navigate(Screen.PhotoFlow.route) {
             launchSingleTop = true
         }
     }
+
     fun openHomeAndClearPhotoFlow() {
         navController.navigate(Screen.Home.route) {
             popUpTo(Screen.PhotoFlow.route) {
@@ -58,6 +80,10 @@ class Router(
             }
             launchSingleTop = true
         }
+    }
+
+    fun openSkinTypesGuide() {
+        navController.navigate(Screen.SkinTypesGuide.route)
     }
 
     // GALLERY

@@ -18,9 +18,24 @@ sealed class Screen(val route: String) {
     object Settings : Screen("settings")
 
     // PHOTO & AI ANALYSIS
-    object AnalysisResult : Screen("analysis_result/{photoId}") {
-        fun createRoute(photoId: Long) = "analysis_result/$photoId"
+    object AnalysisResult : Screen("analysis_result") {
+
+        const val ARG_PHOTO_IDS = "photoIds"
+        const val ARG_ANALYSIS_ID = "analysisId"
+        const val ARG_DIARY_ID = "diaryId"
+
+        fun route(
+            photoIds: List<Int>,
+            diaryId: Int
+        ) =
+            "analysis_result?" +
+                    "$ARG_PHOTO_IDS=${photoIds.joinToString(",")}" +
+                    "&$ARG_DIARY_ID=$diaryId"
+
+        fun routeById(id: Int) =
+            "analysis_result?$ARG_ANALYSIS_ID=$id"
     }
+
     object Compare : Screen("compare/{id1}/{id2}") {  //сравнение 2 фото
         fun createRoute(id1: String, id2: String) =
             "compare/$id1/$id2"
