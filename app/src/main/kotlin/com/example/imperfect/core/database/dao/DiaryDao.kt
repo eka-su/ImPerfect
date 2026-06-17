@@ -40,18 +40,35 @@ interface DiaryDao {
     suspend fun getAllDays(): List<SkinDiaryDayEntity>
 
     @Query("""
-        SELECT DISTINCT d.*
-        FROM skin_diary_day d
+    SELECT DISTINCT d.*
+    FROM skin_diary_day d
 
-        LEFT JOIN diary_photo p
-            ON p.diary_id = d.id
+    LEFT JOIN diary_photo p
+        ON p.diary_id = d.id
 
-        LEFT JOIN multi_image_analysis a
-            ON a.diary_id = d.id
+    LEFT JOIN multi_image_analysis a
+        ON a.diary_id = d.id
 
-        WHERE
-            p.id IS NOT NULL
-            OR a.id IS NOT NULL
+    LEFT JOIN care_routine_items c
+        ON c.diaryId = d.id
+
+    WHERE
+        p.id IS NOT NULL
+        OR a.id IS NOT NULL
+        OR c.id IS NOT NULL
     """)
     suspend fun getFilledDays(): List<SkinDiaryDayEntity>
+
+    @Query("""
+    SELECT DISTINCT d.*
+    FROM skin_diary_day d
+   LEFT JOIN diary_photo p ON p.diary_id = d.id
+   LEFT JOIN multi_image_analysis a ON a.diary_id = d.id
+   LEFT JOIN care_routine_items c ON c.diaryId = d.id
+   WHERE p.id IS NOT NULL
+      OR a.id IS NOT NULL
+      OR c.id IS NOT NULL
+   """)
+    fun observeFilledDays(): Flow<List<SkinDiaryDayEntity>>
+
 }

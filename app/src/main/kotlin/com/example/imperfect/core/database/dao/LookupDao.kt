@@ -4,8 +4,11 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import com.example.imperfect.core.database.entity.CareTimeSlotEntity
 import com.example.imperfect.core.database.entity.PhotoAnalysisStatusEntity
 import com.example.imperfect.core.database.entity.PhotoViewTypeEntity
+import com.example.imperfect.core.database.entity.SkincareCategoryEntity
+import com.example.imperfect.core.database.entity.SkincareProductEntity
 
 @Dao
 interface LookupDao {
@@ -28,6 +31,22 @@ interface LookupDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertPhotoAnalysisStatuses(
         list: List<PhotoAnalysisStatusEntity>
+    )
+
+    // Для ухода
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    suspend fun insertSkincareCategories(
+        items: List<SkincareCategoryEntity>
+    )
+
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    suspend fun insertCareTimeSlots(
+        items: List<CareTimeSlotEntity>
+    )
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertSkincareProducts(
+        items: List<SkincareProductEntity>
     )
 
 }

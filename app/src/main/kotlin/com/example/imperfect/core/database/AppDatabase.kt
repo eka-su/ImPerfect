@@ -7,9 +7,13 @@ import com.example.imperfect.core.database.dao.AnalysisDao
 import com.example.imperfect.core.database.dao.DiaryDao
 import com.example.imperfect.core.database.dao.LookupDao
 import com.example.imperfect.core.database.dao.PhotoDao
+import com.example.imperfect.core.database.dao.SkincareDao
 import com.example.imperfect.core.database.dao.UserDao
 import com.example.imperfect.core.database.entity.AnalysisContextEntity
 import com.example.imperfect.core.database.entity.AppUserEntity
+import com.example.imperfect.core.database.entity.CareRoutineItemEntity
+import com.example.imperfect.core.database.entity.CareRoutineTimeLinkEntity
+import com.example.imperfect.core.database.entity.CareTimeSlotEntity
 import com.example.imperfect.core.database.entity.DiaryPhotoEntity
 import com.example.imperfect.core.database.entity.MultiImageAnalysisEntity
 import com.example.imperfect.core.database.entity.MultiImageAnalysisPhotoEntity
@@ -20,6 +24,8 @@ import com.example.imperfect.core.database.entity.SkinAnalysisEntity
 import com.example.imperfect.core.database.entity.SkinDiaryDayEntity
 import com.example.imperfect.core.database.entity.SkinIssueEntity
 import com.example.imperfect.core.database.entity.SkinIssueSummaryEntity
+import com.example.imperfect.core.database.entity.SkincareCategoryEntity
+import com.example.imperfect.core.database.entity.SkincareProductEntity
 
 @Database(
     entities = [
@@ -35,6 +41,12 @@ import com.example.imperfect.core.database.entity.SkinIssueSummaryEntity
         SkinIssueSummaryEntity::class,
         MultiImageAnalysisPhotoEntity::class,
         AnalysisContextEntity::class,
+
+        SkincareCategoryEntity::class,
+        SkincareProductEntity::class,
+        CareTimeSlotEntity::class,
+        CareRoutineItemEntity::class,
+        CareRoutineTimeLinkEntity::class
     ],
     version = 1
 )
@@ -46,4 +58,6 @@ abstract class AppDatabase : RoomDatabase() {
     abstract fun lookupDao(): LookupDao
     abstract fun userDao(): UserDao
     abstract fun analysisContextDao(): AnalysisContextDao
+
+    abstract fun skincareDao(): SkincareDao
 }
