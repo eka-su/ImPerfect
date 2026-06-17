@@ -22,7 +22,7 @@ class DatabaseSeeder(
     private val diaryDao: DiaryDao,
     private val photoDao: PhotoDao,
     private val analysisDao: AnalysisDao,
-    private val contextDao: AnalysisContextDao
+    private val contextDao: AnalysisContextDao,
 ) {
 
     suspend fun seed() {
@@ -179,4 +179,5 @@ class DatabaseSeeder(
             )
         )
     }
+
 }

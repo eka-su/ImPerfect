@@ -11,4 +11,6 @@ interface DiaryRepository {
     fun observeDay(date: LocalDate): Flow<DiaryFullUi>
 
     suspend fun getMarkedDates(): Set<LocalDate>
+
+    fun observeMarkedDates(): Flow<Set<LocalDate>>
 }

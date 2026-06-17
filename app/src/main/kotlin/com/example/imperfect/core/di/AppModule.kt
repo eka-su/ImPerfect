@@ -37,6 +37,28 @@ import com.example.imperfect.feature.photo.domain.usecase.GetPhotoTypesUseCase
 import com.example.imperfect.feature.photo.domain.usecase.GetPhotosUseCase
 import com.example.imperfect.feature.photo.domain.usecase.ValidatePhotosUseCase
 import com.example.imperfect.feature.photo.presentation.viewmodel.PhotoViewModel
+import com.example.imperfect.feature.skincare.data.local.source.SkincareLocalDataSource
+import com.example.imperfect.feature.skincare.data.repository.SkincareRepositoryImpl
+import com.example.imperfect.feature.skincare.domain.repository.SkincareRepository
+import com.example.imperfect.feature.skincare.domain.usecase.AddProductToRoutineUseCase
+import com.example.imperfect.feature.skincare.domain.usecase.AddProductUseCase
+import com.example.imperfect.feature.skincare.domain.usecase.DeleteProductUseCase
+import com.example.imperfect.feature.skincare.domain.usecase.GetCategoriesUseCase
+import com.example.imperfect.feature.skincare.domain.usecase.GetFavoritesUseCase
+import com.example.imperfect.feature.skincare.domain.usecase.GetProductUseCase
+import com.example.imperfect.feature.skincare.domain.usecase.GetProductsUseCase
+import com.example.imperfect.feature.skincare.domain.usecase.GetRecentProductsUseCase
+import com.example.imperfect.feature.skincare.domain.usecase.GetRoutineHistoryUseCase
+import com.example.imperfect.feature.skincare.domain.usecase.GetTimeSlotsUseCase
+import com.example.imperfect.feature.skincare.domain.usecase.GetTodayRoutineUseCase
+import com.example.imperfect.feature.skincare.domain.usecase.MarkRoutineUsedUseCase
+import com.example.imperfect.feature.skincare.domain.usecase.RemoveRoutineItemUseCase
+import com.example.imperfect.feature.skincare.domain.usecase.RemoveTimeFromRoutineUseCase
+import com.example.imperfect.feature.skincare.domain.usecase.SearchProductsUseCase
+import com.example.imperfect.feature.skincare.domain.usecase.ToggleFavoriteUseCase
+import com.example.imperfect.feature.skincare.domain.usecase.ToggleRoutineTimeUseCase
+import com.example.imperfect.feature.skincare.domain.usecase.UpdateProductUseCase
+import com.example.imperfect.feature.skincare.presentation.viewmodel.SkincareViewModel
 import org.koin.core.module.dsl.viewModel
 import org.koin.dsl.module
 
@@ -77,6 +99,7 @@ object AppModule {
         single { get<AppDatabase>().analysisDao() }
         single { get<AppDatabase>().lookupDao() }
         single { get<AppDatabase>().analysisContextDao() }
+        single { get<AppDatabase>().skincareDao() }
 
         // Seeders
         single {
@@ -111,7 +134,6 @@ object AppModule {
         // TODO: реазлизоват репозитории
         // AuthRepository
         // NutritionRepository
-        // ProductRepository
         // TriggerRepository
         // RecommendationRepository
         // UserStateRepository
@@ -155,6 +177,7 @@ object AppModule {
                 get(),
                 get(),
                 get(),
+                get(),
             )
         }
 
@@ -168,6 +191,15 @@ object AppModule {
         //Session
         single { UserSession() }
 
+        // Skincare
+        single {
+            SkincareLocalDataSource(get())
+        }
+
+        single<SkincareRepository> {
+            SkincareRepositoryImpl(get())
+        }
+
     }
 
     // USE CASES
@@ -175,7 +207,6 @@ object AppModule {
         // TODO: добавить use case
         // Auth: login/register/reset
         // Nutrition: add/edit food + water
-        // Products: add/get/favorite
         // Triggers: get/save
         // Recommendations: get
         // UserState: save lifestyle/skin/health
@@ -225,6 +256,80 @@ object AppModule {
             GetPhotoTypesUseCase(get())
         }
 
+        // Skincare
+
+        single {
+            AddProductUseCase(get())
+        }
+
+        single {
+            UpdateProductUseCase(get())
+        }
+
+        single {
+            GetProductsUseCase(get())
+        }
+
+        single {
+            GetProductUseCase(get())
+        }
+
+        single {
+            SearchProductsUseCase(get())
+        }
+
+        single {
+            GetFavoritesUseCase(get())
+        }
+
+        single {
+            GetRecentProductsUseCase(get())
+        }
+
+        single {
+            GetTodayRoutineUseCase(get())
+        }
+
+        single {
+            AddProductToRoutineUseCase(get())
+        }
+
+        single {
+            RemoveRoutineItemUseCase(get())
+        }
+
+        single {
+            GetCategoriesUseCase(get())
+        }
+
+        single {
+            GetTimeSlotsUseCase(get())
+        }
+
+        single {
+            DeleteProductUseCase(get())
+        }
+
+        single {
+            ToggleFavoriteUseCase(get())
+        }
+
+        single {
+            GetRoutineHistoryUseCase(get())
+        }
+
+        single {
+            MarkRoutineUsedUseCase(get())
+        }
+
+        single {
+            ToggleRoutineTimeUseCase(get())
+        }
+
+        single {
+            RemoveTimeFromRoutineUseCase(get())
+        }
+
     }
 
     // VIEWMODELS
@@ -233,7 +338,6 @@ object AppModule {
         // AuthViewModel
         // HomeViewModel
         // NutritionViewModel
-        // ProductViewModel
         // TriggerViewModel
         // RecommendationViewModel
         // UserStateViewModel
@@ -264,6 +368,31 @@ object AppModule {
         viewModel {
             DiaryViewModel(get())
         }
+
+        viewModel {
+            SkincareViewModel(
+                get(),
+                get(),
+                get(),
+                get(),
+                get(),
+                get(),
+                get(),
+                get(),
+                get(),
+                get(),
+                get(),
+                get(),
+                get(),
+                get(),
+                get(),
+                get(),
+                get(),
+                get(),
+            )
+        }
+
+
 
     }
 

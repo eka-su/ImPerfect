@@ -3,9 +3,9 @@ package com.example.imperfect.core.ui.designsystem.icon
 import com.example.imperfect.R
 
 sealed class IconAction(
-    val iconRes: Int,
-    val contentDescription: String
-) {
+    override val iconRes: Int,
+    override val contentDescription: String
+) : AppIcon {
     data object Back : IconAction(
         R.drawable.ic_back,
         "Back"
@@ -95,4 +95,45 @@ sealed class IconAction(
         R.drawable.ic_lifestyle,
         "Образ жизни"
     )
+
+    data object Delete : IconAction(
+        R.drawable.ic_delete,
+        "Удалить"
+    )
+
+    data object Add : IconAction(
+        R.drawable.ic_plus,
+        "Добавить"
+    )
+
+    data object Search : IconAction(
+        R.drawable.ic_search,
+        "Поиск"
+    )
+
+    data object Favorite : IconAction(
+        R.drawable.ic_favorite,
+        "Добавить"
+    )
+
+    data object FavoriteFill : IconAction(
+        R.drawable.ic_favorite_fill,
+        "Поиск"
+    )
+
+    data object More : IconAction(
+        R.drawable.ic_check,
+        "Раскрыть"
+    )
+
+    data object ShowAll : IconAction(
+        R.drawable.ic_show_all,
+        "Показать все"
+    )
+
+    data object Filter : IconAction(
+        R.drawable.ic_filter,
+        "Фильтр"
+    )
+
 }

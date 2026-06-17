@@ -2,10 +2,19 @@ package com.example.imperfect.core.ui.kit.container
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.BasicTextField
+import androidx.compose.foundation.text.KeyboardActions
+import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -13,9 +22,12 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.example.imperfect.R
 import com.example.imperfect.core.ui.designsystem.theme.IconGray
 import com.example.imperfect.core.ui.designsystem.theme.InputBackground
 import com.example.imperfect.core.ui.designsystem.theme.TextSecondary
@@ -25,7 +37,12 @@ fun InputContainer(
     value: String,
     onValueChange: (String) -> Unit,
     modifier: Modifier = Modifier,
-    placeholder: String
+    placeholder: String,
+
+    leadingIcon: (@Composable (() -> Unit))? = null,
+
+    keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
+    keyboardActions: KeyboardActions = KeyboardActions.Default,
 ) {
     Box(
         modifier = modifier
@@ -36,24 +53,41 @@ fun InputContainer(
             )
             .padding(horizontal = 14.dp, vertical = 14.dp)
     ) {
-        BasicTextField(
-            value = value,
-            onValueChange = onValueChange,
-            modifier = Modifier.fillMaxWidth(),
-            textStyle = MaterialTheme.typography.labelMedium.copy(
-                color = TextSecondary
-            ),
-            decorationBox = { innerTextField ->
-                if (value.isEmpty()) {
-                    Text(
-                        text = placeholder,
-                        style = MaterialTheme.typography.labelMedium,
-                        color = IconGray
-                    )
-                }
-                innerTextField()
+
+        Row(
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+
+            if (leadingIcon != null) {
+                leadingIcon()
+
+                Spacer(Modifier.width(8.dp))
             }
-        )
+
+            Box(modifier = Modifier.weight(1f)) {
+
+                BasicTextField(
+                    value = value,
+                    onValueChange = onValueChange,
+                    modifier = Modifier.fillMaxWidth(),
+                    textStyle = MaterialTheme.typography.labelMedium.copy(
+                        color = TextSecondary
+                    ),
+                    keyboardOptions = keyboardOptions,
+                    keyboardActions = keyboardActions,
+                    decorationBox = { innerTextField ->
+                        if (value.isEmpty()) {
+                            Text(
+                                text = placeholder,
+                                style = MaterialTheme.typography.labelMedium,
+                                color = IconGray
+                            )
+                        }
+                        innerTextField()
+                    }
+                )
+            }
+        }
     }
 }
 
@@ -64,9 +98,29 @@ fun InputContainerPreview() {
 
     var text by remember { mutableStateOf("") }
 
-    InputContainer(
-        value = text,
-        onValueChange = { text = it },
-        placeholder = "Введите текст..."
-    )
+    Column(modifier = Modifier.padding(16.dp)) {
+
+        InputContainer(
+            value = text,
+            onValueChange = { text = it },
+            placeholder = "Введите текст..."
+        )
+
+        Spacer(Modifier.height(16.dp))
+
+
+        InputContainer(
+            value = text,
+            onValueChange = { text = it },
+            placeholder = "Введите текст с иконкой",
+            leadingIcon = {
+                Icon(
+                    painter = painterResource(id = R.drawable.ic_search),
+                    contentDescription = "Search",
+                    tint = IconGray,
+                    modifier = Modifier.size(18.dp)
+                )
+            }
+        )
+    }
 }

@@ -3,9 +3,9 @@ package com.example.imperfect.core.ui.designsystem.icon
 import com.example.imperfect.R
 
 sealed class IconFilter(
-    val iconRes: Int,
-    val contentDescription: String
-) {
+    override val iconRes: Int,
+    override val contentDescription: String
+) : AppIcon {
 
     data object AllZones : IconFilter(
         R.drawable.ic_all_face,
@@ -60,6 +60,68 @@ sealed class IconFilter(
     data object QuestionMan  : IconFilter(
         R.drawable.ic_question_man,
         "Question Man"
+    )
+
+    //уход категории
+    data object Lotion : IconFilter(
+        R.drawable.ic_lotion,
+        "Лосьон"
+    )
+
+    data object Cream : IconFilter(
+        R.drawable.ic_cream,
+        "Крем"
+    )
+
+    data object Balm : IconFilter(
+        R.drawable.ic_balm,
+        "Бальзам"
+    )
+
+    data object Mask : IconFilter(
+        R.drawable.ic_mask,
+        "Маска"
+    )
+
+    data object Toner : IconFilter(
+        R.drawable.ic_toner,
+        "Тоник"
+    )
+
+    data object Gel : IconFilter(
+        R.drawable.ic_gel,
+        "Гель"
+    )
+
+    data object Emulsion : IconFilter(
+        R.drawable.ic_emulsion,
+        "Эмульсия"
+    )
+
+    data object Serum : IconFilter(
+        R.drawable.ic_serum,
+        "Сыворотка"
+    )
+
+    data object OtherCare : IconFilter(
+        R.drawable.ic_other_care,
+        "Другой уход"
+    )
+
+    // Утро ночь все
+    data object Morning : IconFilter(
+        R.drawable.ic_morning,
+        "Утро"
+    )
+
+    data object Evening : IconFilter(
+        R.drawable.ic_evening,
+        "Вечер"
+    )
+
+    data object Alltime : IconFilter(
+        R.drawable.ic_all_time,
+        "Утром и вечер"
     )
 
 }

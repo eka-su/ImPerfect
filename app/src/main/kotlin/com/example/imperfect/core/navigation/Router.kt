@@ -2,6 +2,7 @@ package com.example.imperfect.core.navigation
 
 import android.util.Log
 import androidx.navigation.NavController
+import com.example.imperfect.feature.skincare.domain.model.CareProduct
 
 class Router(
     private val navController: NavController
@@ -96,9 +97,36 @@ class Router(
     }
 
     // SKINCARE
-    fun openSkincare() = navController.navigate(Screen.SkincareList.route)
-    fun openProduct(id: String) {
-        navController.navigate(Screen.ProductDetail.createRoute(id))
+
+    fun openSkincare(diaryId: Int) {
+        navController.navigate(Screen.SkincareList.createRoute(diaryId))
+    }
+
+    fun openProduct(product: CareProduct, diaryId: Int) {
+        navController.navigate(
+            Screen.ProductDetail.createRoute(
+                product.id.toString(),
+                diaryId.toString()
+            )
+        )
+    }
+
+    fun openAddProduct() {
+        navController.navigate(Screen.AddProduct.route)
+    }
+
+    fun openCreateProduct(productId: Int? = null) {
+        navController.navigate(
+            Screen.CreateProduct.createRoute(productId?.toString())
+        )
+    }
+
+    fun openProductsBase() {
+        navController.navigate(Screen.ProductsBase.route)
+    }
+
+    fun openFavorites() {
+        navController.navigate(Screen.Favorites.route)
     }
 
     // NUTRITION
@@ -109,6 +137,7 @@ class Router(
     fun openAddWater() {
         navController.navigate(Screen.AddWater.route)
     }
+
 
     // REPORTS
     fun openReports() = navController.navigate(Screen.Reports.route)
