@@ -68,13 +68,33 @@ sealed class Screen(val route: String) {
         fun createRoute(id: String) = "gallery_photo/$id"
     }
 
-    // SKINCARE / PRODUCTS
-    object SkincareList : Screen("skincare_list")
-    object AddProduct : Screen("add_product")
-    object CreateProduct : Screen("create_product")
-    object ProductDetail : Screen("product_detail/{productId}") {
-        fun createRoute(id: String) = "product_detail/$id"
+    // SKINCARE
+    object SkincareList : Screen("skincare/{diaryId}") {
+        const val ARG_DIARY_ID = "diaryId"
+
+        fun createRoute(diaryId: Int) = "skincare/$diaryId"
     }
+
+    object AddProduct : Screen("add_product")
+
+    object CreateProduct : Screen("create_product?productId={productId}") {
+
+        const val ARG_PRODUCT_ID = "productId"
+
+        fun createRoute(productId: String? = null): String {
+            return if (productId != null)
+                "create_product?productId=$productId"
+            else
+                "create_product"
+        }
+    }
+
+    object ProductDetail : Screen("product_detail/{productId}/{diaryId}") {
+
+        fun createRoute(productId: String, diaryId: String) =
+            "product_detail/$productId/$diaryId"
+    }
+
     object ProductsBase : Screen("products_base")
     object Favorites : Screen("favorites")
 

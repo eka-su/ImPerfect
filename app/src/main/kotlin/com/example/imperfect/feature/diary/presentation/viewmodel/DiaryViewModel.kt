@@ -30,14 +30,13 @@ class DiaryViewModel(
         Log.d(TAG, "INITIAL DATE = ${_state.value.selectedDate}")
 
         viewModelScope.launch {
-
-            _state.update {
-                it.copy(
-                    markedDates = repository.getMarkedDates(),
-                )
-            }
+            repository.observeMarkedDates()
+                .collect { dates ->
+                    _state.update {
+                        it.copy(markedDates = dates)
+                    }
+                }
         }
-
 
         loadDay(_state.value.selectedDate)
     }
@@ -93,6 +92,8 @@ class DiaryViewModel(
                     )
 
                     Log.d(TAG, "NEW STATE = $newState")
+                    Log.d("MARK", "MARKED FROM DB = ${it.markedDates}") // старое
+                    Log.d("MARK", "NEW DAY = ${day.date}") // текущий день
 
                     newState
                 }

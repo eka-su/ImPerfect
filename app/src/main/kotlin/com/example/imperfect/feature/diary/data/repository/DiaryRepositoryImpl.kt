@@ -5,12 +5,15 @@ import com.example.imperfect.core.session.UserSession
 import com.example.imperfect.core.database.dao.AnalysisDao
 import com.example.imperfect.core.database.dao.DiaryDao
 import com.example.imperfect.core.database.dao.PhotoDao
+import com.example.imperfect.core.database.dao.SkincareDao
 import com.example.imperfect.core.database.entity.SkinDiaryDayEntity
 import com.example.imperfect.feature.analysis.domain.interpretation.calculateSkinHealthPercent
 import com.example.imperfect.feature.diary.domain.model.DiaryFullUi
 import com.example.imperfect.feature.diary.domain.model.DiaryPhotoPreview
 import com.example.imperfect.feature.diary.domain.repository.DiaryRepository
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.map
 import java.time.LocalDate
 
@@ -18,7 +21,8 @@ class DiaryRepositoryImpl(
     private val dao: DiaryDao,
     private val photoDao: PhotoDao,
     private val analysisDao: AnalysisDao,
-    private val userSession: UserSession
+    private val userSession: UserSession,
+    private val skincareDao: SkincareDao,
 ) : DiaryRepository {
 
     override suspend fun getOrCreateDay(date: LocalDate): DiaryFullUi {
@@ -53,6 +57,8 @@ class DiaryRepositoryImpl(
 
         val analysis = analysisDao.getLatestByDiaryId(entity.id)
 
+        val skincare = skincareDao.getRoutineWithDetails(entity.id).first()
+
         return DiaryFullUi(
             id = entity.id,
             userId = userId,
@@ -61,7 +67,8 @@ class DiaryRepositoryImpl(
             analysisId = analysis?.id,
             analysisPercent = analysis?.let {
                 calculateSkinHealthPercent(it.totalDetections)
-            }
+            },
+            skincare = skincare
         )
     }
 
@@ -69,27 +76,33 @@ class DiaryRepositoryImpl(
         val userId = userSession.userId
 
         return dao.observeByDate(userId, date.toString())
-            .map { entity ->
+            .flatMapLatest { entity ->
 
-                val photos = photoDao.getPhotos(entity.id).map {
-                    DiaryPhotoPreview(
-                        id = it.id,
-                        filePath = it.filePath
-                    )
-                }
+                skincareDao.getRoutineWithDetails(entity.id)
+                    .map { skincare ->
 
-                val analysis = analysisDao.getLatestByDiaryId(entity.id)
+                        val photos = photoDao.getPhotos(entity.id).map {
+                            DiaryPhotoPreview(
+                                id = it.id,
+                                filePath = it.filePath
+                            )
+                        }
 
-                DiaryFullUi(
-                    id = entity.id,
-                    userId = userId,
-                    date = entity.date,
-                    photos = photos,
-                    analysisId = analysis?.id,
-                    analysisPercent = analysis?.let {
-                        calculateSkinHealthPercent(it.totalDetections)
+                        val analysis =
+                            analysisDao.getLatestByDiaryId(entity.id)
+
+                        DiaryFullUi(
+                            id = entity.id,
+                            userId = userId,
+                            date = entity.date,
+                            photos = photos,
+                            analysisId = analysis?.id,
+                            analysisPercent = analysis?.let {
+                                calculateSkinHealthPercent(it.totalDetections)
+                            },
+                            skincare = skincare
+                        )
                     }
-                )
             }
     }
 
@@ -100,5 +113,12 @@ class DiaryRepositoryImpl(
                 LocalDate.parse(it.date)
             }
             .toSet()
+    }
+
+    override fun observeMarkedDates(): Flow<Set<LocalDate>> {
+        return dao.observeFilledDays()
+            .map { list ->
+                list.map { LocalDate.parse(it.date) }.toSet()
+            }
     }
 }
