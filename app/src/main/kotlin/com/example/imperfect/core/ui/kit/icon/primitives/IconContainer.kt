@@ -10,14 +10,14 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
-import com.example.imperfect.core.ui.designsystem.icon.IconAction
+import com.example.imperfect.core.ui.designsystem.icon.AppIcon
 import com.example.imperfect.core.ui.designsystem.icon.IconSize
 import com.example.imperfect.core.ui.designsystem.icon.IconStyle
 import com.example.imperfect.core.ui.designsystem.icon.IconStyles
 
 @Composable
 fun IconContainer(
-    action: IconAction,
+    action: AppIcon,
     modifier: Modifier = Modifier,
     size: IconSize = IconSize.SMALL,
     style: IconStyle = IconStyles.Default
