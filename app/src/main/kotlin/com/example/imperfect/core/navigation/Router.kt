@@ -138,6 +138,27 @@ class Router(
         navController.navigate(Screen.AddWater.route)
     }
 
+    // FEELINGS (SKIN / HEALTH + EMOTION)
+    fun openSkinFeeling(
+        diaryId: Int
+    ) {
+        navController.navigate(
+            Screen.SkinFeeling.createRoute(
+                diaryId
+            )
+        )
+    }
+
+    fun openHealthFeeling(
+        diaryId: Int
+    ) {
+        navController.navigate(
+            Screen.HealthFeeling.createRoute(
+                diaryId
+            )
+        )
+    }
+
 
     // REPORTS
     fun openReports() = navController.navigate(Screen.Reports.route)

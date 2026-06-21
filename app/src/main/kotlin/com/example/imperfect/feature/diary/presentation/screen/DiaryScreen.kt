@@ -21,8 +21,11 @@ import com.example.imperfect.feature.diary.presentation.component.SkinAnalysisCa
 import com.example.imperfect.feature.diary.presentation.model.DiaryInputItem
 import com.example.imperfect.feature.diary.presentation.utils.calculateCompleted
 import com.example.imperfect.feature.diary.presentation.utils.calculateProgress
+import com.example.imperfect.feature.diary.presentation.utils.skinFeelingSubtitle
 import com.example.imperfect.feature.diary.presentation.utils.skincareSubtitle
 import com.example.imperfect.feature.diary.presentation.viewmodel.DiaryViewModel
+import com.example.imperfect.feature.diary.presentation.utils.healthFeelingSubtitle
+
 
 @Composable
 fun DiaryScreen(
@@ -53,14 +56,15 @@ fun DiaryScreen(
         DiaryInputItem(
             icon = IconAction.Skin,
             title = "Ощущение кожи",
-            subtitle = "Опиши как чувствует твоя кожа",
-            onClick = { }
+            subtitle = day?.skinFeelingSubtitle() ?: "",
+            onClick = {  day?.id?.let { router.openSkinFeeling(it) }
+            }
         ),
         DiaryInputItem(
             icon = IconAction.Health,
             title = "Здоровье и чувства",
-            subtitle = "Опиши как ты себя чувствуешь",
-            onClick = { }
+            subtitle = day?.healthFeelingSubtitle() ?: "",
+            onClick = {   day?.id?.let { router.openHealthFeeling(it) }}
         ),
         DiaryInputItem(
             icon = IconAction.Lifestyle,

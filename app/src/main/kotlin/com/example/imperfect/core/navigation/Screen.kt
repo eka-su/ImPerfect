@@ -122,10 +122,22 @@ sealed class Screen(val route: String) {
         fun createRoute(id: String) = "recommendation_detail/$id"
     }
 
-    // 🧍‍♀️ USER STATE
     object Lifestyle : Screen("lifestyle")
-    object SkinCondition : Screen("skin_condition")
-    object HealthFeeling : Screen("health_feeling")
+
+    // FEELINGS (SKIN / HEALTH + EMOTION)
+    object SkinFeeling : Screen("skin_feeling/{diaryId}") {
+
+        fun createRoute(
+            diaryId: Int
+        ) = "skin_feeling/$diaryId"
+    }
+
+    object HealthFeeling : Screen("health_feeling/{diaryId}") {
+
+        fun createRoute(
+            diaryId: Int
+        ) = "health_feeling/$diaryId"
+    }
 
     // REPORTS
     object Reports : Screen("reports")

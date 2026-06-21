@@ -9,10 +9,11 @@ fun calculateProgress(day: DiaryFullUi?): Int {
         day.photos.isNotEmpty(),
         day.analysisId != null,
         day.skincare.isNotEmpty(),
+        day.skinFeeling.isNotEmpty(),
+        day.healthFeeling.isNotEmpty(),
 
         false, // food
-        false  // lifestyle и др
     ).count { it }
 
-    return done * 100 / 5
+    return done * 100 / 6
 }

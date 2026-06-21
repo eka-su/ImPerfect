@@ -12,63 +12,112 @@ interface DiaryDao {
 
     // INSERT / UPDATE
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertDay(day: SkinDiaryDayEntity): Long
+    suspend fun insertDay(
+        day: SkinDiaryDayEntity
+    ): Long
 
     // READ (SINGLE DAY)
-    @Query("""
+    @Query(
+        """
         SELECT * FROM skin_diary_day
         WHERE user_id = :userId AND date = :date
         LIMIT 1
-    """)
-    suspend fun getByDate(userId: Int, date: String): SkinDiaryDayEntity?
+        """
+    )
+    suspend fun getByDate(
+        userId: Int,
+        date: String
+    ): SkinDiaryDayEntity?
 
-    @Query("""
+    @Query(
+        """
         SELECT * FROM skin_diary_day
         WHERE user_id = :userId AND date = :date
         LIMIT 1
-    """)
-    fun observeByDate(userId: Int, date: String): Flow<SkinDiaryDayEntity>
+        """
+    )
+    fun observeByDate(
+        userId: Int,
+        date: String
+    ): Flow<SkinDiaryDayEntity>
 
-    @Query("SELECT * FROM skin_diary_day WHERE id = :id LIMIT 1")
-    suspend fun getById(id: Int): SkinDiaryDayEntity?
+    @Query(
+        "SELECT * FROM skin_diary_day WHERE id = :id LIMIT 1"
+    )
+    suspend fun getById(
+        id: Int
+    ): SkinDiaryDayEntity?
 
     // READ (LISTS)
-    @Query("""
+    @Query(
+        """
         SELECT *
         FROM skin_diary_day
-    """)
+        """
+    )
     suspend fun getAllDays(): List<SkinDiaryDayEntity>
 
-    @Query("""
-    SELECT DISTINCT d.*
-    FROM skin_diary_day d
+    @Query(
+        """
+        SELECT DISTINCT d.*
+        FROM skin_diary_day d
 
-    LEFT JOIN diary_photo p
-        ON p.diary_id = d.id
+        LEFT JOIN diary_photo p
+            ON p.diary_id = d.id
 
-    LEFT JOIN multi_image_analysis a
-        ON a.diary_id = d.id
+        LEFT JOIN multi_image_analysis a
+            ON a.diary_id = d.id
 
-    LEFT JOIN care_routine_items c
-        ON c.diaryId = d.id
+        LEFT JOIN care_routine_items c
+            ON c.diaryId = d.id
 
-    WHERE
-        p.id IS NOT NULL
-        OR a.id IS NOT NULL
-        OR c.id IS NOT NULL
-    """)
-    suspend fun getFilledDays(): List<SkinDiaryDayEntity>
+        LEFT JOIN diary_feelings df
+            ON df.diary_id = d.id
 
-    @Query("""
-    SELECT DISTINCT d.*
-    FROM skin_diary_day d
-   LEFT JOIN diary_photo p ON p.diary_id = d.id
-   LEFT JOIN multi_image_analysis a ON a.diary_id = d.id
-   LEFT JOIN care_routine_items c ON c.diaryId = d.id
-   WHERE p.id IS NOT NULL
-      OR a.id IS NOT NULL
-      OR c.id IS NOT NULL
-   """)
-    fun observeFilledDays(): Flow<List<SkinDiaryDayEntity>>
+        LEFT JOIN feeling_options fo
+            ON fo.id = df.feeling_option_id
 
+        WHERE
+            p.id IS NOT NULL
+            OR a.id IS NOT NULL
+            OR c.id IS NOT NULL
+            OR fo.screen_id IN (:skinScreenId, :healthScreenId)
+        """
+    )
+    suspend fun getFilledDays(
+        skinScreenId: Int,
+        healthScreenId: Int
+    ): List<SkinDiaryDayEntity>
+
+    @Query(
+        """
+        SELECT DISTINCT d.*
+        FROM skin_diary_day d
+
+        LEFT JOIN diary_photo p
+            ON p.diary_id = d.id
+
+        LEFT JOIN multi_image_analysis a
+            ON a.diary_id = d.id
+
+        LEFT JOIN care_routine_items c
+            ON c.diaryId = d.id
+
+        LEFT JOIN diary_feelings df
+            ON df.diary_id = d.id
+
+        LEFT JOIN feeling_options fo
+            ON fo.id = df.feeling_option_id
+
+        WHERE
+            p.id IS NOT NULL
+            OR a.id IS NOT NULL
+            OR c.id IS NOT NULL
+            OR fo.screen_id IN (:skinScreenId, :healthScreenId)
+        """
+    )
+    fun observeFilledDays(
+        skinScreenId: Int,
+        healthScreenId: Int
+    ): Flow<List<SkinDiaryDayEntity>>
 }
