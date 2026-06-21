@@ -25,6 +25,12 @@ import com.example.imperfect.feature.diary.data.repository.DiaryRepositoryImpl
 import com.example.imperfect.feature.diary.domain.repository.DiaryRepository
 import com.example.imperfect.feature.diary.domain.usecase.GetOrCreateDiaryDayUseCase
 import com.example.imperfect.feature.diary.presentation.viewmodel.DiaryViewModel
+import com.example.imperfect.feature.feeling.data.repository.FeelingRepositoryImpl
+import com.example.imperfect.feature.feeling.data.source.FeelingLocalSource
+import com.example.imperfect.feature.feeling.domain.repository.FeelingRepository
+import com.example.imperfect.feature.feeling.domain.usecase.GetFeelingFormUseCase
+import com.example.imperfect.feature.feeling.domain.usecase.SaveFeelingFormUseCase
+import com.example.imperfect.feature.feeling.presentation.viewmodel.FeelingViewModel
 import com.example.imperfect.feature.photo.data.repository.LookupRepositoryImpl
 import com.example.imperfect.feature.photo.data.repository.PhotoRepositoryImpl
 import com.example.imperfect.feature.photo.data.source.LookupLocalSource
@@ -100,6 +106,7 @@ object AppModule {
         single { get<AppDatabase>().lookupDao() }
         single { get<AppDatabase>().analysisContextDao() }
         single { get<AppDatabase>().skincareDao() }
+        single { get<AppDatabase>().feelingDao() }
 
         // Seeders
         single {
@@ -178,6 +185,7 @@ object AppModule {
                 get(),
                 get(),
                 get(),
+                get(),
             )
         }
 
@@ -198,6 +206,15 @@ object AppModule {
 
         single<SkincareRepository> {
             SkincareRepositoryImpl(get())
+        }
+
+        // Feelings
+        single {
+            FeelingLocalSource(get())
+        }
+
+        single<FeelingRepository> {
+            FeelingRepositoryImpl(get())
         }
 
     }
@@ -330,6 +347,17 @@ object AppModule {
             RemoveTimeFromRoutineUseCase(get())
         }
 
+        // Feelings
+
+        factory {
+            GetFeelingFormUseCase(get())
+        }
+
+        factory {
+            SaveFeelingFormUseCase(get())
+        }
+
+
     }
 
     // VIEWMODELS
@@ -392,7 +420,12 @@ object AppModule {
             )
         }
 
-
+        viewModel {
+            FeelingViewModel(
+                get(),
+                get()
+            )
+        }
 
     }
 

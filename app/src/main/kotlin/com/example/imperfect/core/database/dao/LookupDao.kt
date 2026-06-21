@@ -5,6 +5,8 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.example.imperfect.core.database.entity.CareTimeSlotEntity
+import com.example.imperfect.core.database.entity.FeelingOptionEntity
+import com.example.imperfect.core.database.entity.FeelingScreenEntity
 import com.example.imperfect.core.database.entity.PhotoAnalysisStatusEntity
 import com.example.imperfect.core.database.entity.PhotoViewTypeEntity
 import com.example.imperfect.core.database.entity.SkincareCategoryEntity
@@ -48,5 +50,12 @@ interface LookupDao {
     suspend fun insertSkincareProducts(
         items: List<SkincareProductEntity>
     )
+
+    // Feeling
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertFeelingScreens(list: List<FeelingScreenEntity>)
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertFeelingOptions(list: List<FeelingOptionEntity>)
 
 }

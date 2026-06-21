@@ -32,6 +32,8 @@ import com.example.imperfect.feature.analysis.presentation.viewmodel.AnalysisVie
 import com.example.imperfect.feature.analytics.presentation.AnalyticsScreen
 import com.example.imperfect.feature.diary.presentation.screen.DiaryScreen
 import com.example.imperfect.feature.diary.presentation.viewmodel.DiaryViewModel
+import com.example.imperfect.feature.feeling.presentation.screen.FeelingScreen
+import com.example.imperfect.feature.feeling.presentation.viewmodel.FeelingViewModel
 import com.example.imperfect.feature.home.presentation.HomeScreen
 import com.example.imperfect.feature.photo.presentation.flow.screen.PhotoFlowScreen
 import com.example.imperfect.feature.photo.presentation.viewmodel.PhotoViewModel
@@ -51,6 +53,8 @@ import com.example.imperfect.feature.triggers.presentation.TriggersScreen
 @Composable
 fun AppNavHost() {
 
+    val feelingViewModel = koinViewModel<FeelingViewModel>()
+
     val skincareViewModel = koinViewModel<SkincareViewModel>()
     Log.d(
         "VM_CHECK",
@@ -64,7 +68,6 @@ fun AppNavHost() {
             skincareViewModel.observeRoutine(state.currentDiaryId)
         }
     }
-
 
     DisposableEffect(Unit) {
         Log.d("NAV", "AppNavHost MOUNTED")
@@ -509,6 +512,43 @@ fun AppNavHost() {
                         },
                     )
                 }
+            }
+
+            // Feelings
+            composable(
+                route = Screen.SkinFeeling.route
+            ) { backStackEntry ->
+
+                val diaryId =
+                    backStackEntry.arguments
+                        ?.getString("diaryId")
+                        ?.toInt()
+                        ?: return@composable
+
+                FeelingScreen(
+                    diaryId = diaryId,
+                    screenCode = "SKIN",
+                    viewModel = feelingViewModel,
+                    router = router,
+                )
+            }
+
+            composable(
+                route = Screen.HealthFeeling.route
+            ) { backStackEntry ->
+
+                val diaryId =
+                    backStackEntry.arguments
+                        ?.getString("diaryId")
+                        ?.toInt()
+                        ?: return@composable
+
+                FeelingScreen(
+                    diaryId = diaryId,
+                    screenCode = "HEALTH",
+                    viewModel = feelingViewModel,
+                    router = router,
+                )
             }
 
 

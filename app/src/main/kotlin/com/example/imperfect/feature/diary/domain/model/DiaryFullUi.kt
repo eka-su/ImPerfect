@@ -9,5 +9,7 @@ data class DiaryFullUi(
     val photos: List<DiaryPhotoPreview>,
     val analysisId: Int?,
     val analysisPercent: Int?,
-    val skincare: List<RoutineWithDetails> = emptyList()
+    val skincare: List<RoutineWithDetails> = emptyList(),
+    val skinFeeling: List<String> = emptyList(),
+    val healthFeeling: List<String> = emptyList()
 )

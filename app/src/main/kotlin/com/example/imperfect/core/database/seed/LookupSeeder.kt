@@ -2,6 +2,8 @@ package com.example.imperfect.core.database.seed
 
 import com.example.imperfect.core.database.dao.LookupDao
 import com.example.imperfect.core.database.entity.CareTimeSlotEntity
+import com.example.imperfect.core.database.entity.FeelingOptionEntity
+import com.example.imperfect.core.database.entity.FeelingScreenEntity
 import com.example.imperfect.core.database.entity.PhotoAnalysisStatusEntity
 import com.example.imperfect.core.database.entity.PhotoViewTypeEntity
 import com.example.imperfect.core.database.entity.SkincareCategoryEntity
@@ -165,5 +167,61 @@ class LookupSeeder(
                 )
             )
         )
+
+
+        dao.insertFeelingScreens(
+            listOf(
+                FeelingScreenEntity(
+                    id = 1,
+                    code = "SKIN",
+                    name = "Состояние кожи"
+                ),
+                FeelingScreenEntity(
+                    id = 2,
+                    code = "HEALTH",
+                    name = "Здоровье и эмоции"
+                )
+            )
+        )
+
+        dao.insertFeelingOptions(
+            listOf(
+                FeelingOptionEntity(1, 1, "Сухость"),
+                FeelingOptionEntity(2, 1, "Жирность"),
+                FeelingOptionEntity(3, 1, "Покраснение"),
+                FeelingOptionEntity(4, 1, "Стянутость"),
+                FeelingOptionEntity(5, 1, "Зуд"),
+                FeelingOptionEntity(6, 1, "Шелушение"),
+                FeelingOptionEntity(7, 1, "Чувствительность"),
+                FeelingOptionEntity(8, 1, "Обезвоженность"),
+                FeelingOptionEntity(9, 1, "Раздражение"),
+                FeelingOptionEntity(10, 1, "Жжение"),
+                FeelingOptionEntity(11, 1, "Покалывание"),
+                FeelingOptionEntity(12, 1, "Тусклость"),
+                FeelingOptionEntity(13, 1, "Жирный блеск"),
+
+                FeelingOptionEntity(14, 2, "Отлично"),
+                FeelingOptionEntity(15, 2, "Хорошо"),
+                FeelingOptionEntity(16, 2, "Средне"),
+                FeelingOptionEntity(17, 2, "Плохо"),
+                FeelingOptionEntity(18, 2, "Радость"),
+                FeelingOptionEntity(19, 2, "Стресс"),
+                FeelingOptionEntity(20, 2, "Усталость"),
+                FeelingOptionEntity(21, 2, "Сонливость"),
+                FeelingOptionEntity(22, 2, "Головная боль"),
+                FeelingOptionEntity(23, 2, "Боли в животе"),
+                FeelingOptionEntity(24, 2, "Тошнота"),
+                FeelingOptionEntity(25, 2, "Головокружение"),
+                FeelingOptionEntity(26, 2, "Аллергия"),
+                FeelingOptionEntity(27, 2, "Простуда"),
+                FeelingOptionEntity(28, 2, "Вздутие"),
+                FeelingOptionEntity(29, 2, "Боли в мышцах"),
+                FeelingOptionEntity(30, 2, "Раздражительность"),
+                FeelingOptionEntity(31, 2, "Апатия"),
+                FeelingOptionEntity(32, 2, "Энергичность"),
+                FeelingOptionEntity(33, 2, "Спокойствие")
+            )
+        )
+
     }
 }

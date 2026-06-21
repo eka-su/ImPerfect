@@ -7,8 +7,8 @@ fun calculateCompleted(day: DiaryFullUi?): Int {
 
     return listOf(
         day.skincare.isNotEmpty(),
-
+        day.skinFeeling.isNotEmpty(),
+        day.healthFeeling.isNotEmpty(),
         false, // food
-        false  // lifestyle и отслаьное потом
     ).count { it }
 }
